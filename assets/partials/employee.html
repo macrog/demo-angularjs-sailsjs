@@ -1,0 +1,110 @@
+<div class="container">
+    <button class="btn btn-success" ng-click="emp.showNewEmployeeForm()" ng-disabled="emp.showHide">Add New Employee</button>
+    <div class="space"></div>
+    <div ng-show="emp.showHide">
+      <md-content layout-padding="">
+          <form name="employeeForm">
+              <div class="from-header">
+                  <md-input-container>
+                      <label>Job Title</label>
+                      <input ng-model="emp.user.jobTitle" placeholder="Ex: Developer" required="">
+                  </md-input-container>
+                  <md-input-container>
+                      <label>Email</label>
+                      <input ng-model="emp.user.email" type="email" placeholder="Ex: name@email.com" required="">
+                  </md-input-container>
+              </div>
+              <div layout-gt-xs="row">
+                  <md-input-container class="md-block" flex-gt-xs="">
+                      <label>Company (Disabled)</label>
+                      <input ng-model="emp.user.company" disabled="">
+                  </md-input-container>
+
+                  <md-input-container>
+                      <label>Start date</label>
+                      <md-datepicker ng-model="emp.user.startDate" required=""></md-datepicker>
+                  </md-input-container>
+              </div>
+
+              <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm="">
+                      <label>First name</label>
+                      <input ng-model="emp.user.firstName" required name="firstName" ng-maxlength="30" ng-minlength="2">
+                      <div ng-messages="employeeForm.firstName.$error">
+                          <div ng-message="required">First name is required.</div>
+                          <div ng-message="maxlength">The name has to be less than 30 characters long.</div>
+                          <div ng-message="minlength">The name has to be at lest 2 characters long.</div>
+                      </div>
+                  </md-input-container>
+
+                  <md-input-container class="md-block" flex-gt-sm="">
+                      <label>Last name</label>
+                      <input ng-model="emp.user.lastName" required name="lastName" ng-maxlength="40" ng-minlength="3">
+                      <div ng-messages="employeeForm.lastName.$error">
+                          <div ng-message="required">Last name is required.</div>
+                          <div ng-message="maxlength">The name has to be less than 40 characters long.</div>
+                          <div ng-message="minlength">The name has to be at lest 3 characters long.</div>
+                      </div>
+                  </md-input-container>
+              </div>
+
+              <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm="">
+                      <label>City</label>
+                      <input ng-model="emp.user.city">
+                  </md-input-container>
+
+                  <md-input-container class="md-block" flex-gt-sm="">
+                      <label>Postal Code</label>
+                      <input name="postalCode" ng-model="emp.user.postalCode" placeholder="12345" required="" ng-pattern="/^[0-9]{5}$/" ng-maxlength="5">
+
+                      <div ng-messages="employeeForm.postalCode.$error" role="alert" multiple="">
+                          <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                          <div ng-message="pattern" class="my-message">That doesn't look like a valid post code.</div>
+                          <div ng-message="maxlength" class="my-message">It's far toooo long, 5 digits only please!'</div>
+                      </div>
+                  </md-input-container>
+              </div>
+          </form>
+          <div class="pull-right">
+              <button class="md-fab md-button md-ink-ripple" type="button" ng-click="emp.cancelNewEmployee()">
+                  <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </button>
+              <button class="md-fab md-primary md-button md-ink-ripple" ng-disabled="employeeForm.$invalid" type="button" ng-click="emp.addNewOrEditEmployee(emp.user)">
+                  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+          </div>
+      </md-content>
+    </div>
+    <table ng-show="emp.employees.length > 0" class="table table-hover" ng-hide="emp.showHide">
+        <tr>
+            <th>Job Title</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Start Date</th>
+            <th class="text-center">Action</th>
+        </tr>
+        <tr ng-repeat="employee in emp.employees | orderBy: 'startDate'">
+            <td>{{employee.jobTitle}}</td>
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.startDate | date: 'fullDate'}}</td>
+            <td>
+                <div class="col-xs-12 text-center">
+                    <div class="col-sm-6 col-xs-12">
+                        <button type="button" class="btn btn-success" ng-click="emp.editSelectedRecord(employee);">
+                            <span class="glyphicon glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <button type="button" class="btn btn-danger" ng-click="emp.deleteConfirmation($event, employee);">
+                            <span class="glyphicon glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
