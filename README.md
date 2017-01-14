@@ -1,3 +1,3 @@
-# demo-angularjs-company-workers
+# demo-angularjs-sailsjs
 
-a [Sails](http://sailsjs.org) application
+[Sails](http://sailsjs.org) application, using angularjs front-end.
