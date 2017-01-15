@@ -1,14 +1,22 @@
 .space{
     height: 25px;
 }
+.search-filter-label{
+    border: 2px solid grey;
+    border-radius: 2em;
+    padding-left: 25px;
+}
 .search-filter-input{
     height: 30px;
     margin-left: 15px;
     padding-left: 15px;
     background-color: lightgray;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
 }
 .search-filter-input:focus{
-    background-color: white;
+    outline: none;
+    background-color: white;    
 }
 .md-dialog-content-body.ng-scope{
     margin-top: 40px;
@@ -17,4 +25,25 @@ h2.md-title.ng-binding{
     text-align: center;
     color: red;
     font-weight: 900;
-}  
+} 
+.go-away {
+    opacity: 1;
+    transition: 1s linear all;
+    -webkit-transition: 1s linear all;
+}
+
+.go-away.ng-enter {
+    opacity: 0;
+}
+
+.go-away.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+.go-away.ng-leave {
+    opacity: 1;
+}
+
+.go-away.ng-leave.ng-leave-active {
+    opacity: 0;
+} 

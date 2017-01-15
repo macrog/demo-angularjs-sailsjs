@@ -10,8 +10,8 @@ app.controller('EmployeeCtrl',[
         //
         vm.showHide = false;
 
-        //default user object
-        vm.user = {
+        //default employee object
+        vm.employee = {
             title: '',
             email: '',
             firstName: '',
@@ -35,15 +35,7 @@ app.controller('EmployeeCtrl',[
         //cancel employee form
         vm.cancelNewEmployee = function(){
             vm.showHide = !vm.showHide;
-            vm.user = {
-                title: '',
-                email: '',
-                firstName: '',
-                lastName: '',
-                company: 'Web Business Systems ',            
-                city: '',
-                postalCode: ''
-            };
+            vm.resetEmployee();
         };
         vm.addNewOrEditEmployee = function(obj){  
             //no id new record
@@ -52,6 +44,8 @@ app.controller('EmployeeCtrl',[
                     .then(function(response){
                         vm.employees.push(response.data);
                         vm.showHide = !vm.showHide;
+                        vm.resetEmployee();
+                        
                     })
                     .catch(function(response){
                         $log.debug(response);
@@ -77,10 +71,10 @@ app.controller('EmployeeCtrl',[
         vm.editSelectedRecord = function(obj){
             //set the date to be a date object
             obj.startDate = new Date(obj.startDate);
-            vm.user = obj;
+            vm.employee = obj;
             vm.showHide = !vm.showHide;
         };
-        //show confirmation dialog and delete selected record if user click YES
+        //show confirmation dialog and delete selected record if employee click YES
         vm.deleteConfirmation = function(ev, obj){
             var confirm = $mdDialog.confirm()
                 .title('Delete selected!')
@@ -106,5 +100,17 @@ app.controller('EmployeeCtrl',[
                 //do nothing, close the dialog
             });
         };
+
+        vm.resetEmployee = function(){
+            vm.employee = {
+                title: '',
+                email: '',
+                firstName: '',
+                lastName: '',
+                company: 'Web Business Systems ',            
+                city: '',
+                postalCode: ''
+            };            
+        }
     }
 ]);
