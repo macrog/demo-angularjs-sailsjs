@@ -76,35 +76,42 @@
           </div>
       </md-content>
     </div>
-    <table ng-show="emp.employees.length > 0" class="table table-hover" ng-hide="emp.showHide">
-        <tr>
-            <th>Job Title</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Email</th>
-            <th>Start Date</th>
-            <th class="text-center">Action</th>
-        </tr>
-        <tr ng-repeat="employee in emp.employees | orderBy: 'startDate'">
-            <td>{{employee.jobTitle}}</td>
-            <td>{{employee.firstName}}</td>
-            <td>{{employee.lastName}}</td>
-            <td>{{employee.email}}</td>
-            <td>{{employee.startDate | date: 'fullDate'}}</td>
-            <td>
-                <div class="col-xs-12 text-center">
-                    <div class="col-sm-6 col-xs-12">
-                        <button type="button" class="btn btn-success" ng-click="emp.editSelectedRecord(employee);">
-                            <span class="glyphicon glyphicon glyphicon-pencil"></span>
-                        </button>
+    <div ng-show="emp.employees.length > 0">
+        <div ng-hide="emp.showHide">
+            <label>Filter: 
+                <input class="search-filter-input" ng-model="searchText">
+            </label>
+        </div>
+        <table ng-show="emp.employees.length > 0" class="table table-hover" ng-hide="emp.showHide">
+            <tr>
+                <th>Job Title</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Start Date</th>
+                <th class="text-center">Action</th>
+            </tr>
+            <tr ng-repeat="employee in emp.employees | orderBy: 'startDate' | filter:searchText">
+                <td>{{employee.jobTitle}}</td>
+                <td>{{employee.firstName}}</td>
+                <td>{{employee.lastName}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.startDate | date: 'fullDate'}}</td>
+                <td>
+                    <div class="col-xs-12 text-center">
+                        <div class="col-sm-6 col-xs-12">
+                            <button type="button" class="btn btn-success" ng-click="emp.editSelectedRecord(employee);">
+                                <span class="glyphicon glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <button type="button" class="btn btn-danger" ng-click="emp.deleteConfirmation($event, employee);">
+                                <span class="glyphicon glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <button type="button" class="btn btn-danger" ng-click="emp.deleteConfirmation($event, employee);">
-                            <span class="glyphicon glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

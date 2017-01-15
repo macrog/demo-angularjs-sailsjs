@@ -1,3 +1,20 @@
 .space{
     height: 25px;
 }
+.search-filter-input{
+    height: 30px;
+    margin-left: 15px;
+    padding-left: 15px;
+    background-color: lightgray;
+}
+.search-filter-input:focus{
+    background-color: white;
+}
+.md-dialog-content-body.ng-scope{
+    margin-top: 40px;
+} 
+h2.md-title.ng-binding{
+    text-align: center;
+    color: red;
+    font-weight: 900;
+}  

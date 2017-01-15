@@ -83,8 +83,8 @@ app.controller('EmployeeCtrl',[
         //show confirmation dialog and delete selected record if user click YES
         vm.deleteConfirmation = function(ev, obj){
             var confirm = $mdDialog.confirm()
-                .title('Would you like to delete selected record?')
-                .textContent('')
+                .title('Delete selected!')
+                .textContent('You are about to delete employee record for ' + obj.firstName.toUpperCase() + ' ' + obj.lastName.toUpperCase() + '. Are you sure ?')
                 .ariaLabel('')
                 .targetEvent(ev)
                 .ok('YES')
